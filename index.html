@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<title>Caixa Eletrônico</title>
+		<meta charset="utf-8">
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	</head>
+	<body ng-app="CaixaEletronico">
+		<div class="container" ng-controller="SaqueController">
+			<div class="row">
+				<div class="col-12">
+					<div class="alert alert-primary" role="alert">
+						<p>
+							Desenvolva um programa que simule a entrega de notas quando um cliente efetuar um saque em um caixa eletrônico. Os requisitos básicos são os seguintes:
+							<ul>
+								<li>Entregar o menor número de notas;</li>
+								<li>É possível sacar o valor solicitado com as notas disponíveis;</li>
+								<li>Saldo do cliente infinito;</li>
+								<li>Quantidade de notas infinito (pode-se colocar um valor finito de cédulas para aumentar a dificuldade do problema);</li>
+								<li>Notas disponíveis de R$ 100,00; R$ 50,00; R$ 20,00 e R$ 10,00</li>
+							</ul>
+						</p>
+
+						<p>
+							Exemplos:
+							<ul>
+								<li>Valor do Saque: R$ 30,00 – Resultado Esperado: Entregar 1 nota de R$20,00 e 1 nota de R$ 10,00.</li>
+								<li>Valor do Saque: R$ 80,00 – Resultado Esperado: Entregar 1 nota de R$50,00 1 nota de R$ 20,00 e 1 nota de R$ 10,00.</li>
+							</ul>
+						</p>
+					</div>
+				</div>	
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					<form class="form-inline">					
+						<div class="form-group">
+							<label for="valor_saque">R$ </label> 
+							<input class="form-control" type="number" min="10" step="10" name="valor_saque" ng-model="valor_saque" placeholder="10" ng-init="valor_saque=10" required>
+							<button class="btn btn-success" ng-click="sacar()">Sacar</button>
+						</div>
+					</form>
+					<br/>
+					<div class="alert alert-warning" role="alert">
+						Notas disponíveis: 10, 20, 50 e 100.
+					</div>
+				</div>
+			</div>	
+
+			<hr/>
+
+			<div class="row">
+				<div class="col-12">
+					<div class="alert alert-danger" role="alert" ng-if="error">
+						Não é possível sacar o valor solicitado com as notas disponíveis.
+					</div>
+
+					<span ng-repeat="nota in notas_disponiveis">
+						<span ng-if="nota.quantidade > 0">
+							<span class="badge badge-info">{{nota.quantidade}}x</span>
+							<img class="img-thumbnail" title="Nota de {{nota.valor}} reais" alt="Nota de {{nota.valor}} reais" src="img/{{nota.valor}}.jpg">
+						</span>
+					</span>
+				</div>
+			</div>	
+		</div>
+
+		<script src="js/app.js"></script>
+	</body>
+</html>
